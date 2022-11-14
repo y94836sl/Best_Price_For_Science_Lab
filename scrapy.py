@@ -5,6 +5,15 @@ import csv
 
 result = {}
 
+def generateUrl(query):
+	# Generate Amazon URL from query
+	query = query.replace(' ', '+')
+	url1 = 'https://www.amazon.com/s?k=' + query
+	# Generate TechBuyer URL from query
+	# e.g. https://www.techbuyer.com/uk/catalogsearch/result/?q=lenovo+thinkcentre
+	url2 = 'https://www.techbuyer.com/uk/catalogsearch/result/?q=' + query
+	return url1, url2
+
 def getData(url):
 	HEADERS = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'}
 	webpage = requests.get(url, headers=HEADERS)
@@ -30,7 +39,7 @@ def getAmazonProducts(bs):
 	result['Amazon'] =  products
 	return result
 
-def scrapeTechbuyer(bs):
+def getTechbuyerProducts(bs):
 	# Scrape product names
 	names = bs.findAll('a',{'class':'products__item-link'})
 	nameList = []
@@ -55,6 +64,10 @@ def scrapeTechbuyer(bs):
 	result['Techbuyer'] =  products
 	return result
 
-url =  "https://www.amazon.co.uk/s?k=Lenovo+ThinkCentre&crid=1NM9IGP0ZU0CL&sprefix=lenovo+thinkcentre%2Caps%2C176&ref=nb_sb_noss_1"
+#url =  "https://www.amazon.co.uk/s?k=Lenovo+ThinkCentre&crid=1NM9IGP0ZU0CL&sprefix=lenovo+thinkcentre%2Caps%2C176&ref=nb_sb_noss_1"
+query = 'Lenovo ThinkCentre'
+url1, url2 = generateUrl(query)
+getAmazonProducts(getData(url1))
+getTechbuyerProducts(getData(url2))
 
-print(getAmazonProducts(getData(url)))
+print(result)
