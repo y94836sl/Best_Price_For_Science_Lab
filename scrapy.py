@@ -8,7 +8,7 @@ result = {}
 def generateUrl(query):
 	# Generate Amazon URL from query
 	query = query.replace(' ', '+')
-	url1 = 'https://www.amazon.com/s?k=' + query
+	url1 = 'https://www.amazon.co.uk/s?k=' + query
 	# Generate TechBuyer URL from query
 	# e.g. https://www.techbuyer.com/uk/catalogsearch/result/?q=lenovo+thinkcentre
 	url2 = 'https://www.techbuyer.com/uk/catalogsearch/result/?q=' + query
@@ -21,6 +21,7 @@ def getData(url):
 	return soup
 
 def getAmazonProducts(bs):
+	
 	# Scrape product names
 	names = bs.findAll('span',{'class':'a-size-medium a-color-base a-text-normal'})
 	nameList = []
@@ -31,11 +32,20 @@ def getAmazonProducts(bs):
 	priceList = []
 	for price in prices:
 		priceList.append(price.get_text())
+	# Scrape product urls
+	urls = bs.findAll('a',{'class':'a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal'})
+	urlList = []
+	for url in urls:
+		url = 'https://www.amazon.co.uk/' + url.attrs['href']
+		urlList.append(url)
 	# Store scraped data in a dictionary
 	n = len(nameList)
 	products = {}
 	for i in range(n):
-		products[nameList[i]] = priceList[i]
+		details = {}
+		details['price'] = priceList[i]
+		details['url'] = urlList[i]
+		products[nameList[i]] = details
 	result['Amazon'] =  products
 	return result
 
@@ -56,15 +66,26 @@ def getTechbuyerProducts(bs):
 	priceList = []
 	for price in prices:
 		priceList.append(price.get_text())
+	
+	# Scrape product urls
+	urls = bs.findAll('a',{'class':'products__item-link'})
+	urlList = []
+	for url in urls:
+		urlList.append(url.attrs['href'])
+	# Store scraped data in a dictionary
+	n = len(nameList)
+	products = {}
 	# Store scraped data in a dictionary
 	n = len(nameList)
 	products = {}
 	for i in range(n):
-		products[nameList[i]] = priceList[i]
+		details = {}
+		details['price'] = priceList[i]
+		details['url'] = urlList[i]
+		products[nameList[i]] = details
 	result['Techbuyer'] =  products
 	return result
 
-#url =  "https://www.amazon.co.uk/s?k=Lenovo+ThinkCentre&crid=1NM9IGP0ZU0CL&sprefix=lenovo+thinkcentre%2Caps%2C176&ref=nb_sb_noss_1"
 query = 'Lenovo ThinkCentre'
 url1, url2 = generateUrl(query)
 getAmazonProducts(getData(url1))
