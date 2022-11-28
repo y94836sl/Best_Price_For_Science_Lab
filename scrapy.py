@@ -12,7 +12,10 @@ def generateUrl(query):
 	# Generate TechBuyer URL from query
 	# e.g. https://www.techbuyer.com/uk/catalogsearch/result/?q=lenovo+thinkcentre
 	url2 = 'https://www.techbuyer.com/uk/catalogsearch/result/?q=' + query
-	return url1, url2
+	# Generate scientific laboratory supplies URL from query
+	# e.g. https://www.scientificlabs.co.uk/search/ethanol
+	url3 = 'https://www.scientificlabs.co.uk/search/' + query
+	return url1, url2, url3
 
 def getData(url):
 	HEADERS = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'}
@@ -86,9 +89,43 @@ def getTechbuyerProducts(bs):
 	result['Techbuyer'] =  products
 	return result
 
-query = 'Lenovo ThinkCentre'
-url1, url2 = generateUrl(query)
+def getScientificLabsProduct(bs):
+	nameList = []
+	urlList = []
+	sizeList = []
+	priceList = []
+	
+	# Scrape product details
+	products = bs.findAll('div', {'class':'table-row'})
+	for product in products:
+		name_a = product.find('a',href=True, title=True, style="color:black;", target=True)
+		href = name_a.get('href')
+		name = name_a.get('title')
+		size_div = product.find('div',{'class':'unit-size mobileGridCloserRows flex-100 indentedGridRow mobileDisplayContents range-unit'})
+		size = size_div.find('span', id=True).get_text()
+		price = product.find('span',{'class':'gridDisplayBlock'}).get_text()
+		
+		nameList.append(name)
+		urlList.append(href)
+		sizeList.append(size)
+		priceList.append(price)
+		
+	n = len(products)
+	product = {}
+	for i in range(n):
+		details = {}
+		details['size'] = sizeList[i]
+		details['price'] = priceList[i]
+		details['url'] = urlList[i]
+		
+		product[nameList[i]] = details
+	result['ScientificLaboratorySupplies '] =  product
+	return result
+
+query = 'Ethanol'
+url1, url2, url3 = generateUrl(query)
 getAmazonProducts(getData(url1))
 getTechbuyerProducts(getData(url2))
+getScientificLabsProduct(getData(url3))
 
 print(result)
