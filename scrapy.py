@@ -6,16 +6,22 @@ import csv
 result = {}
 
 def generateUrl(query):
-	# Generate Amazon URL from query
 	query = query.replace(' ', '+')
+	# Generate Amazon URL from query
 	url1 = 'https://www.amazon.co.uk/s?k=' + query
+	
 	# Generate TechBuyer URL from query
-	# e.g. https://www.techbuyer.com/uk/catalogsearch/result/?q=lenovo+thinkcentre
 	url2 = 'https://www.techbuyer.com/uk/catalogsearch/result/?q=' + query
+	
 	# Generate scientific laboratory supplies URL from query
-	# e.g. https://www.scientificlabs.co.uk/search/ethanol
 	url3 = 'https://www.scientificlabs.co.uk/search/' + query
-	return url1, url2, url3
+	
+#     # Generate RS URL from query
+#     url4 = 'https://uk.rs-online.com/web/c/?searchTerm=' + query
+	
+	# Generate Farnell URL from query
+	url4 = 'https://uk.farnell.com/search?st=' + query
+	return url1, url2, url3, url4
 
 def getData(url):
 	HEADERS = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'}
@@ -122,10 +128,38 @@ def getScientificLabsProduct(bs):
 	result['ScientificLaboratorySupplies '] =  product
 	return result
 
+def getFarnellProduct(bs):
+	nameL = []
+	priceL = []
+	urlL = []
+	
+	# Scrape product details
+	descriptions = bs.findAll('td', {'class':'description enhanceDescClmn'})
+	for d in descriptions:
+		name = d.find('a', href=True).get('title')
+		url = d.find('a', href=True).get('href')
+		nameL.append(name)
+		urlL.append(url)
+	priceCol = bs.findAll('td',{'class':'listPrice enhanceQtyColumn'})
+	for i in priceCol:
+		price = i.find('span', {'class':'vatExcl'}).get_text()
+		priceL.append(price)
+	n = len(nameL)
+	product = {}
+	for i in range(n):
+		details = {}
+		details['price'] = priceL[i]
+		details['url'] = urlL[i]
+		
+		product[nameL[i]] = details
+	result['Farnell '] =  product
+	return result
+
 query = 'Ethanol'
-url1, url2, url3 = generateUrl(query)
+url1, url2, url3, url4 = generateUrl(query)
 getAmazonProducts(getData(url1))
 getTechbuyerProducts(getData(url2))
 getScientificLabsProduct(getData(url3))
+getFarnellProduct(getData(url4))
 
 print(result)
