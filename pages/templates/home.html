@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+
+{% block content %}
+	<head>
+		<title>Home</title>
+	</head>
+	
+	<body>
+		<header class="jumbotron text-center">
+			<h1 class="display-4">LabSaver</h1>
+			<div class="jumbotron text-center">
+				<p class="container my-5">
+					Discover the most cost-effective lab products with ease. Our app simplifies the process by allowing you to compare prices from multiple suppliers and view your inventory, ranked from least to most in stock.
+				</p>
+			</div>
+			
+			<!-- Search Bar -->
+			<div class="container my-5">
+				<form class="form-inline d-flex justify-content-center">
+					<input
+						class="form-control mr-sm-2"
+						type="search"
+						placeholder="Search"
+						aria-label="Search"
+					/>
+					<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+			</div>
+		</header>
+	</body>
+{% endblock content %}
+</html>
