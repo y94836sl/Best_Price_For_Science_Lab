@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+
+{% block content %}
+	<head>
+		<title>Login</title>
+	</head>
+	
+	<body>
+		<header class="jumbotron text-center">
+			<h1 class="display-4">Welcome to your LabSaver</h1>
+		</header>
+		
+		<div class="container my-5">
+			<form method="post" class="jumbotron text-center">
+				<h2>Login</h2>
+				<br>
+				<div>
+					{% csrf_token %}
+					{{ form.as_p }}
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+				
+				
+			</form>
+		</div>
+	</body>
+{% endblock content %}
+</html>
