@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html>
 {% extends 'base.html' %}
 
 {% block content %}
+
+<!DOCTYPE html>
+<html>
+
 	<head>
 		<title>Login</title>
 	</head>
@@ -19,12 +21,12 @@
 				<div>
 					{% csrf_token %}
 					{{ form.as_p }}
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary">Login</button>
 				</div>
 				
 				
 			</form>
 		</div>
 	</body>
-{% endblock content %}
 </html>
+{% endblock content %}

@@ -1,47 +1,52 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- User Login or not, if user -->
-{% if user_is_authenticated %}
+{% load static %} 
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
+	<link href="{% static 'css/base.css' %}" rel="stylesheet"s> 
+	
+	
 	<!-- Navigation Bar -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{%url 'home' %}">LabSaver</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="{%url 'home' %}">Home</a></li>
-				<li><a href="{%url 'about' %}">About</a></li>
-				<li><a href="#">Inventory</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{%url 'user_profile' %}"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
-				<li><a href="{%url 'logout' %}"> Log out</a></li>
-			</ul>
-		</div>
-	</nav>
-<!-- if guest -->
-{% else %}
-	<!-- Navigation Bar -->
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="{%url 'home' %}">LabSaver</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="{%url 'home' %}">Home</a></li>
-				<li><a href="{%url 'about' %}">About</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{%url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><a href="{%url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-			</ul>
-		</div>
-	</nav>
-{% endif %}
 
-{% block content %}
-{% endblock content %}
+			<!-- User Login or not, if user -->
+			{% if user_is_authenticated %}
+				<ul class="nav navbar-nav">
+					<li><a href="{%url 'home' %}">Home</a></li>
+					<li><a href="{%url 'about' %}">About</a></li>
+					<li><a href="#">Inventory</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
+					<li><a href="#"> Log out</a></li>
+				</ul>
+			{% else %}
+				<!-- if guest -->
+				<ul class="nav navbar-nav">
+					<li><a href="{%url 'home' %}">Home</a></li>
+					<li><a href="{%url 'about' %}">About</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{%url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="{%url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+				
+			{% endif %}
+		</div>
+	</nav>
+	{% block content %}
+	{% endblock content %}
+</html>
+
+
