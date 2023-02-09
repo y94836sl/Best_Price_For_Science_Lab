@@ -1,6 +1,6 @@
-{% load static %} 
 <!DOCTYPE html>
 <html>
+	{% load static %}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,7 +19,7 @@
 			</div>
 
 			<!-- User Login or not, if user -->
-			{% if user_is_authenticated %}
+			{% if user.is_authenticated %}
 				<ul class="nav navbar-nav">
 					<li><a href="{%url 'home' %}">Home</a></li>
 					<li><a href="{%url 'about' %}">About</a></li>
@@ -27,8 +27,18 @@
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
-					<li><a href="#"> Log out</a></li>
+					
+					<!--Drop down -->
+					<li>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{user.username}}<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item"
+								href="{% url 'password_change'%}">Change password</a></li>
+							<li><a class="dropdown-item"
+								href="{% url 'password_reset'%}">Reset password</a></li>
+							<li><a class="dropdown-item" href="{% url 'logout' %}"> Log Out</a></li>
+						</ul>						
+					</li>
 				</ul>
 			{% else %}
 				<!-- if guest -->
@@ -48,5 +58,3 @@
 	{% block content %}
 	{% endblock content %}
 </html>
-
-

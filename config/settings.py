@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-vq!#%5t6%$%oq*c22^4ad21ihkp76wh$0t3q)8*8jcn72dfe9^"
+SECRET_KEY = "django-insecure-dc&_)s3!*jhwcx=3c_bmxd1ip)6uv#=#9^tljz@*)ovlh01$5!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "pages",
+    # Local
     "accounts",
+    "pages",
+    # 3rd Party
+    'crispy_forms', 
+
 ]
 
 MIDDLEWARE = [
@@ -124,5 +128,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = 'home'
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# Redirect after login and logout
+LOGIN_REDIRECT_URL = 'home' 
 LOGOUT_REDIRECT_URL = 'home'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Change password
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
