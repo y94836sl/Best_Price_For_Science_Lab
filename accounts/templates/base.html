@@ -12,7 +12,7 @@
 	
 	
 	<!-- Navigation Bar -->
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{%url 'home' %}">LabSaver</a>
@@ -55,6 +55,25 @@
 			{% endif %}
 		</div>
 	</nav>
+	
+
 	{% block content %}
 	{% endblock content %}
+	
+	<!-- Footer -->
+	<footer class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+		<!-- Copyright -->
+		<div class="container">
+			<br>
+			<p>
+				© Copyright:
+				<a class="badge badge-dark" href="{%url 'home' %}">LabSaver</a>
+			</p>
+			<p>
+				<a class="badge badge-light" href="#">Back to top</a>
+			</p>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
 </html>
