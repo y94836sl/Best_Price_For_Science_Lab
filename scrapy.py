@@ -23,7 +23,8 @@ def generateUrl(query):
     #     url4 = 'https://uk.rs-online.com/web/c/?searchTerm=' + query
 
     # Generate Farnell URL from query
-    url4 = "https://uk.farnell.com/search?st=" + query
+    url4 = "https://uk.farnell.com/search?st=" + query + "&gs=true"
+    
     return url1, url2, url3, url4
 
 
@@ -37,7 +38,8 @@ def getData(url):
 
 
 def getAmazonProducts(bs):
-
+    """Scrape the information of products in Amazon"""
+    
     # Scrape product names
     names = bs.findAll("span", {"class": "a-size-medium a-color-base a-text-normal"})
     nameList = []
@@ -72,6 +74,7 @@ def getAmazonProducts(bs):
 
 
 def getTechbuyerProducts(bs):
+    """Scrape the information of products in TechBuyer"""
     # Scrape product names
     names = bs.findAll("a", {"class": "products__item-link"})
     nameList = []
@@ -110,6 +113,8 @@ def getTechbuyerProducts(bs):
 
 
 def getScientificLabsProduct(bs):
+    """Scrape the information of products in Scientific Laboratory Supplies"""
+    
     nameList = []
     urlList = []
     sizeList = []
@@ -151,6 +156,7 @@ def getScientificLabsProduct(bs):
 
 
 def getFarnellProduct(bs):
+    """Scrape the information of products in Farnell"""
     nameL = []
     priceL = []
     urlL = []
@@ -178,11 +184,14 @@ def getFarnellProduct(bs):
     return result
 
 
-query = "Ethanol"
-url1, url2, url3, url4 = generateUrl(query)
-getAmazonProducts(getData(url1))
-getTechbuyerProducts(getData(url2))
-getScientificLabsProduct(getData(url3))
-getFarnellProduct(getData(url4))
+def getResult(query):
+    """Scrape the information of products according to the user query"""
+    url1, url2, url3, url4 = generateUrl(query)
+    getAmazonProducts(getData(url1))
+    getTechbuyerProducts(getData(url2))
+    getScientificLabsProduct(getData(url3))
+    getFarnellProduct(getData(url4))
+    
+    return result
 
-print(result)
+print(getResult("Ethanol"))
