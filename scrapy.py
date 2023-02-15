@@ -16,7 +16,7 @@ def generateUrl(query):
     # Generate TechBuyer URL from query
     url2 = "https://www.techbuyer.com/uk/catalogsearch/result/?q=" + query
 
-    # Generate scientific laboratory supplies URL from query
+    # Generate Scientific Laboratory Supplies URL from query
     url3 = "https://www.scientificlabs.co.uk/search/" + query
 
     #     # Generate RS URL from query
