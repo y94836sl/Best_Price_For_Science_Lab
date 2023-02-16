@@ -25,15 +25,20 @@
 						Discover our lab products searching function, which helps you find the cheapest lab equipment amount most of the suppliers.
 
 					</p>
-					<form class="form-inline d-flex justify-content-center">
-						<input
-							class="form-control mr-sm-2"
-							type="search"
-							placeholder="Search"
-							aria-label="Search"
-						/>
-						<button type="submit" class="btn btn-primary">Search</button>
-					</form>
+					<!-- Search Bar -->
+					<div class="container my-5">
+						<form class="form-inline d-flex justify-content-center" method="post">
+							{% csrf_token %}
+							<input
+								class="form-control mr-sm-2"
+								type="text"
+								placeholder="Search"
+								aria-label="Search"
+								name="query"
+							/>
+							<button type="submit" class="btn btn-info">Search</button>
+						</form>
+					</div>
 				</div>
 				
 			</div>

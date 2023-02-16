@@ -10,30 +10,55 @@
 		<title>Search</title>
 	</head>
 	
+	<header class="jumbotron text-center">
+		<h1 class="display-4">LabSaver</h1>
+		<!-- Search Bar -->
+		<div class="container searchbar">
+			<form class="form-inline d-flex justify-content-center" method="post">
+				{% csrf_token %}
+				<input
+					class="form-control mr-sm-2"
+					type="text"
+					placeholder="Search"
+					aria-label="Search"
+					name="query"
+				/>
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>
+		</div>
+	</header>
+	
 	
 	<body>
-		<header class="jumbotron text-center">
-			<h1 class="display-4">LabSaver</h1>
-			<div class="jumbotron text-center">
-				<p class="container my-5">
-					Discover the most cost-effective lab products with ease. Our app simplifies the process by allowing you to compare prices from multiple suppliers and view your inventory, ranked from least to most in stock.
-				</p>
-			</div>
-			
-			<!-- Search Bar -->
-			<div class="container my-5">
-				<form class="form-inline d-flex justify-content-center" method="post">
-					<input
-						class="form-control mr-sm-2"
-						type="text"
-						placeholder="Search"
-						aria-label="Search"
-						name="query"
-					/>
-					<button type="submit" class="btn btn-primary">Search</button>
-				</form>
-			</div>
-		</header>
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Supplier</th>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Url</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for supplier, products in results.scrapy.items %}
+						{% for productName, detail in products.items %}
+						<tr>
+							<td>{{ supplier }}</td>
+							<td>{{ productName }}</td>
+							<td>{{ detail.price }}</td>
+							<td>
+								<a href="{{ detail.url }}">Buy me</a>
+							</td>
+						</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		
+		
+		
 	</body>
 	{% endblock content %}
 </html>

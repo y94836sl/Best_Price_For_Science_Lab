@@ -21,8 +21,9 @@
 			</div>
 			
 			<!-- Search Bar -->
-			<div class="container my-5">
+			<div class="container searchbar">
 				<form class="form-inline d-flex justify-content-center" method="post">
+					{% csrf_token %}
 					<input
 						class="form-control mr-sm-2"
 						type="text"
