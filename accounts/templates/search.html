@@ -30,8 +30,10 @@
 	
 	
 	<body>
-		<div class="container">
-			<table class="table">
+		
+		<!-- [ Hover-table ] start -->
+		<div class="container table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>Supplier</th>
@@ -41,7 +43,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for supplier, products in results.scrapy.items %}
+					{% for supplier, products in results.items %}
 						{% for productName, detail in products.items %}
 						<tr>
 							<td>{{ supplier }}</td>
@@ -56,9 +58,7 @@
 				</tbody>
 			</table>
 		</div>
-		
-		
-		
+		<!-- [ Hover-table ] end -->
 	</body>
 	{% endblock content %}
 </html>

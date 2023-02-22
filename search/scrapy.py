@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 from bs4 import BeautifulSoup
+import json
 
-# from bs4 import BeautifulSoup
 import requests
-import csv
 
 result = {}
 
@@ -183,7 +182,6 @@ def getFarnellProduct(bs):
     result["Farnell "] = product
     return result
 
-
 def getResult(query):
     """Scrape the information of products according to the user query"""
     url1, url2, url3, url4 = generateUrl(query)
@@ -194,4 +192,18 @@ def getResult(query):
     
     return result
 
-print(getResult("Ethanol"))
+def sortDict(dic):
+    sortedDict = {}
+    for supplier, value1 in dic.items():
+        for name, detail in value1.items():
+            sortedDict2 = detail
+#            sortedDict2 = sorted(detail.items(), key=lambda x: float(x['price'].replace('£', '')))
+            sortedDict2["supplier"] = supplier
+            sortedDict[name] = dict(sortedDict2)
+    return sortedDict
+                
+
+
+#print(getResult("Ethanol"))
+result = getResult("Ethanol")
+print(sortDict(getResult("Ethanol")))

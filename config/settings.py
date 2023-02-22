@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # Local
     "accounts",
     "pages",
-#    'scraping' # WebScraping
+    'inventory',
     # 3rd Party
     'crispy_forms', 
 

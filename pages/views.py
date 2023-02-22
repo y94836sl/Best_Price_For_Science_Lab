@@ -28,8 +28,7 @@ def SearchResultView(request):
 		query = request.POST.get('query')
 		
 		# Extract the data you want to scrape using BeautifulSoup's selectors
-		results = {}
-		results['scrapy'] = scrapy.getResult(query)
+		results = scrapy.getResult(query)
 		
 		# Render the data in a template
 		return render(request, 'search.html', {'results': results})
