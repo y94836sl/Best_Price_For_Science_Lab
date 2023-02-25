@@ -32,28 +32,27 @@
 	<body>
 		
 		<!-- [ Hover-table ] start -->
-		<div class="container table">
+		<div class="container">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Supplier</th>
-						<th>Name</th>
-						<th>Price</th>
-						<th>Url</th>
+						<th><h4>Supplier</h4></th>
+						<th><h4>Name</h4></th>
+						<th><h4>Price</h4></th>
+						<th><h4>Url</h4></th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for supplier, products in results.items %}
-						{% for productName, detail in products.items %}
+					{% for productName, detail in results.items %}
 						<tr>
-							<td>{{ supplier }}</td>
+							
+							<td>{{ detail.supplier }}</td>
 							<td>{{ productName }}</td>
 							<td>{{ detail.price }}</td>
 							<td>
 								<a href="{{ detail.url }}">Buy me</a>
 							</td>
 						</tr>
-						{% endfor %}
 					{% endfor %}
 				</tbody>
 			</table>
