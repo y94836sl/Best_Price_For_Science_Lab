@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from bs4 import BeautifulSoup
 import json
+from urllib.parse import quote
 
 import requests
 
@@ -8,7 +9,8 @@ result = {}
 
 
 def generateUrl(query):
-    query = query.replace(" ", "+")
+#    query = query.replace(" ", "+")
+    query = quote(query)
     # Generate Amazon URL from query
     url1 = "https://www.amazon.co.uk/s?k=" + query
 
