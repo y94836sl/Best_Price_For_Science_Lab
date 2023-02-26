@@ -139,3 +139,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Change password
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+STATICFILES_DIRS = [
+    BASE_DIR/ "static"
+]
+
+STATIC_ROOT = (BASE_DIR/"asert")

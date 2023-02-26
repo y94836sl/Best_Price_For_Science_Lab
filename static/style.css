@@ -1,0 +1,8 @@
+/*<!--Source: Example HTML code from https://github.com/KenBroTech/Django-Inventory-Management-System-->*/
+body{
+    background: rgb(230, 227, 227);
+}
+.my-card:hover{
+    transform: scale(1.1);
+    transition: 0.2s ease-in-out;
+}
