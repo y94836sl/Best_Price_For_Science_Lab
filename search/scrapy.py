@@ -217,6 +217,6 @@ def getResult(query):
 #        
 #    return sortedDict
                 
-print(getResult("Ethanol"))
+#print(getResult("Ethanol"))
 #result = getResult("Ethanol")
 #print(sortDict(getResult("Ethanol")))
