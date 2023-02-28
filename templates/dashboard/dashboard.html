@@ -2,21 +2,21 @@
 {% extends 'dashboard_base.html' %}
 
 {% block content %}
-<!--  main dashboard  -->
-<div class="row ">
-  <div class="col-md-6 my-4">
-    <div class="bg-white">
-      <div class="card-body">
+<!--Graphs-->
+<div class="container">
+  <div class="row my-5">
+    <div class="col-md-6">
+      <div class="bg-white">
         <canvas id="myChart1" width="400" height="300"></canvas>
         <script>
           var ctx = document.getElementById('myChart1').getContext('2d');
           var myChart1 = new Chart(ctx, {
             type: 'pie',
             data: {
-              labels: [{% for product in product %} '{{product.name}}', {% endfor %}],
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets: [{
-                label: 'Number of Products',
-                data: [{% for product in product %} {{ product.quantity }}, {% endfor %}],
+                label: 'Products',
+                data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                   'rgba(255, 99, 132, 1)',
                   'rgba(54, 162, 235, 1)',
@@ -49,20 +49,18 @@
         </script>
       </div>
     </div>
-  </div>
-  <div class="col-md-6 my-4">
-    <div class="bg-white">
-      <div class="card-body">
+    <div class="col-md-6">
+      <div class="bg-white">
         <canvas id="myChart" width="400" height="300"></canvas>
         <script>
           var ctx = document.getElementById('myChart').getContext('2d');
           var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-              labels: [{% for order in order %} '{{order.name}}',{% endfor %}],
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets: [{
-                label: 'Orders',
-                data: [{% for order in order %} {{ order.order_quantity }}, {% endfor %}],
+                label: 'Products',
+                data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                   'rgba(255, 99, 132, 1)',
                   'rgba(54, 162, 235, 1)',
@@ -97,8 +95,7 @@
     </div>
   </div>
 </div>
-<!--end main dashboard-->
-
+<!--End Graphs-->
 {% endblock content %}
     
 
