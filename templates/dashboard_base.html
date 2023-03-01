@@ -1,4 +1,5 @@
 <!--Source: Example HTML code from W3Schools (w3schools.com)-->
+
 <!DOCTYPE html>
 <html>
 	{% load static %}
@@ -26,108 +27,7 @@
 	</head>
 	
 	<body>
-		<!--	Navigaton Bar	-->
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="{% url 'home' %}">LabSaver</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="collapsibleNavbar">
-					
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a class="nav-link" href="{%url 'home' %}">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{%url 'about' %}">About</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{%url 'search' %}">Search</a>
-						</li>
-						
-						{% if user.is_authenticated %}
-						
-						<li class="nav-item">
-							<a class="nav-link" href="{%url 'dashboard' %}">Inventory</a>
-						</li>
-						
-						<!-- Dropdown -->
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-								{{user.username}}
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="{% url 'password_change'%}">Change password</a>
-								<a class="dropdown-item" href="{% url 'password_reset'%}">Reset password</a>
-								<a class="dropdown-item" href="{% url 'logout' %}"> Log Out</a>
-							</div>
-						</li>
-						
-					</ul>
-					{% endif %}
-				</div>
-			</div>
-		</nav>
-		<!--	Navigaton Bar	-->
-		
-		<!--   Top   -->
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 mt-4">
-					<div class="card">
-						<div class="card-header bg-info text-white">
-							Information
-						</div>
-						<div class="card-body">
-							<h3 class="my-4">New Information</h3>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8 mt-4">
-					<div class="card">
-						<div class="card-header bg-info text-white">
-							Dashboard Statistics
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-4">
-									<a class="text-decoration-none text-dark" href="{% url 'staff' %}">
-										<div class="card my-card shadow">
-											<div class="card-body text-center">
-												<h4>Staff <i class="fas fa-users"></i></h4>
-												<h3>4</h3>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="col-md-4">
-									<a class="text-decoration-none text-dark" href="{% url 'product' %}">
-										<div class="card my-card shadow">
-											<div class="card-body text-center">
-												<h4>Products <i class="fas fa-box"></i></h4>
-												<h3>99</h3>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="col-md-4">
-									<a class="text-decoration-none text-dark" href="{% url 'order' %}">
-										<div class="card my-card shadow">
-											<div class="card-body text-center">
-												<h4>Orders <i class="fas fa-shipping-fast"></i></h4>
-												<h3>10</h3>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Top -->
+		{% include 'inventoryNav.html' %}
 		
 		<div class="container">
 			{% block content %}
