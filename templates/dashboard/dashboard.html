@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<!--Display graph only for the admin user(superuser)-->
 {% if user.is_authenticated and user.is_staff and user.is_superuser %}
 {% include 'inventoryTop.html' %}
 <!--Graphs-->
@@ -99,10 +100,11 @@
   </div>
 </div>
 <!--End Graphs-->
+
+<!--Display staff page for non-admin user-->
 {% else %}
   {% include 'dashboard/staff_index.html' %}
 {% endif %}
+
 {% endblock content %}
     
-
-

@@ -12,24 +12,31 @@
 	
 	<header class="jumbotron text-center">
 		<h1 class="display-4">LabSaver</h1>
-		<!-- Search Bar -->
-		<div class="container searchbar">
-			<form class="form-inline d-flex justify-content-center" method="post">
-				{% csrf_token %}
-				<input
-					class="form-control mr-sm-2"
-					type="text"
-					placeholder="Search"
-					aria-label="Search"
-					name="query"
-				/>
-				<button type="submit" class="btn btn-primary">Search</button>
-			</form>
-		</div>
 	</header>
 	
 	
 	<body>
+		<!-- Search Bar -->
+		<div class="container my-5">
+			<div class=" text-center">
+				<h2 class="display-6">Searching for Lab Equipments</h2>
+				<!-- Search Bar -->
+				<div class="container my-5">
+					<form class="form-inline d-flex justify-content-center" method="post">
+						{% csrf_token %}
+						<input
+							class="form-control mr-sm-2"
+							type="text"
+							placeholder="Search"
+							aria-label="Search"
+							name="query"
+						/>
+						<button type="submit" class="btn btn-info">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Search Bar -->
 		
 		<!-- [ Hover-table ] start -->
 		<div class="container">

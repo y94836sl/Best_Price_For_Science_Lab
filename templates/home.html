@@ -10,31 +10,60 @@
 		<title>Home</title>
 	</head>
 	
+	<header class="jumbotron text-center">
+		<h1 class="display-3">LabSaver</h1>
+	</header>
 	
 	<body>
-		<header class="jumbotron text-center">
-			<h1 class="display-4">LabSaver</h1>
+		
+
+		<!-- Search Bar -->
+		<div class="container my-5">
 			<div class="jumbotron text-center">
+				<h2 class="display-4">Searching</h2>
 				<p class="container my-5">
-					Discover the most cost-effective lab products with ease. Our app simplifies the process by allowing you to compare prices from multiple suppliers and view your inventory, ranked from least to most in stock.
+					Say goodbye to endless browsing and searching for the best deals on lab supplies. LavSaver's search function does the work for you! With just a few clicks, you can compare prices from multiple suppliers, ensuring that you always get the best deal. Whether you're searching for a specific product or simply browsing for the latest lab supplies, LavSaver makes it easy to find what you need at the most cost-effective price. So why wait? Start saving on your lab supplies today with LavSaver's powerful search function.
+					
 				</p>
+				<div class="container my-5">
+					<form class="form-inline d-flex justify-content-center" method="post">
+						{% csrf_token %}
+						<input
+							class="form-control mr-sm-2"
+							type="text"
+							placeholder="Search"
+							aria-label="Search"
+							name="query"
+						/>
+						<button type="submit" class="btn btn-info">Search</button>
+					</form>
+				</div>
 			</div>
-			
-			<!-- Search Bar -->
-			<div class="container searchbar">
-				<form class="form-inline d-flex justify-content-center" method="post">
-					{% csrf_token %}
-					<input
-						class="form-control mr-sm-2"
-						type="text"
-						placeholder="Search"
-						aria-label="Search"
-						name="query"
-					/>
-					<button type="submit" class="btn btn-primary">Search</button>
-				</form>
+		</div>
+		<!-- Search Bar -->
+		
+		
+		<!-- Sign in/ Sign up -->
+		<div class="container mt-5">
+			<div class="jumbotron text-center">
+				<div class="col-md-6 mx-auto">
+					<h1 class="text-center">Welcome to LabSaver</h1>
+					<p class="text-center">Discover more about the LabSaver inventory.</p>
+					<br>
+					
+					<div class="d-flex justify-content-center">
+						<a href="{% url 'signup' %}" class="btn btn-info">Sign Up</a>
+					</div>
+					
+					<br><br>
+					<div class="d-flex justify-content-center">
+						<a href="{% url 'login' %}" class="btn btn-primary">Sign In</a>
+					</div>
+				</div>
 			</div>
-		</header>
+		</div>
+		<!-- Sign in/ Sign up -->
+		
 	</body>
 	{% endblock content %}
 </html>

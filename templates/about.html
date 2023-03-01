@@ -4,55 +4,54 @@
 
 {% block content %}
 	<head>
-		<title>Home</title>
+		<title>About</title>
 	</head>
 	
+	<header class="jumbotron text-center">
+		<h1 class="display-4">About LabSaver</h1>
+		<p class="container my-5">
+			Discover the ultimate solution for your laboratory needs with our innovative app.  Say goodbye to the hassle of searching for the best deals on lab products. LavSaver is here to revolutionize the way you purchase lab supplies, to provide you with a seamless and user-friendly experience, making it easier for you to find the best deals and stay organized. With just a few taps, you can compare prices from multiple suppliers, request orders, and even keep track of your inventory all in one place. Whether you're a researcher, lab manager, or simply someone who needs to purchase lab supplies, LavSaver is the ultimate solution for cost-effective and efficient lab purchasing. Discover the ease and convenience of lab shopping with LavSaver today!
+		</p>
+	</header>
+	
 	<body>
-		<header class="jumbotron text-center">
-			<h1 class="display-4">About LabSaver</h1>
+		<!-- Search Bar -->
+		<div class="container my-5">
 			<div class="jumbotron text-center">
-				<p class="container my-5">
-					Discover the most cost-effective lab products with ease. Our app simplifies the process by allowing you to compare prices from multiple suppliers and view your inventory, ranked from least to most in stock.
-				</p>
-			</div>
-			
-			<br><br><br><br>
-			<!-- Search Bar -->
-			<div class="container my-5">
 				<h2 class="display-4">About Searching</h2>
-				<div class="jumbotron text-center">
-					<p class="container my-5">
-						Discover our lab products searching function, which helps you find the cheapest lab equipment amount most of the suppliers.
-
-					</p>
-					<!-- Search Bar -->
-					<div class="container my-5">
-						<form class="form-inline d-flex justify-content-center" method="post">
-							{% csrf_token %}
-							<input
-								class="form-control mr-sm-2"
-								type="text"
-								placeholder="Search"
-								aria-label="Search"
-								name="query"
-							/>
-							<button type="submit" class="btn btn-info">Search</button>
-						</form>
-					</div>
-				</div>
-				
-			</div>
-			
-			<br><br><br><br><br><br>
-			<h2 class="display-4">About Inventory</h2>
-			<div class="jumbotron text-center">
 				<p class="container my-5">
-					Discover our inventory function, where you can visualise all the inventory with a rank from the lowest to highest and the information about the suppliers.
+					Say goodbye to endless browsing and searching for the best deals on lab supplies. LavSaver's search function does the work for you! With just a few clicks, you can compare prices from multiple suppliers, ensuring that you always get the best deal. Whether you're searching for a specific product or simply browsing for the latest lab supplies, LavSaver makes it easy to find what you need at the most cost-effective price. So why wait? Start saving on your lab supplies today with LavSaver's powerful search function.
+					
+				</p>
+				<!-- Search Bar -->
+				<div class="container my-5">
+					<form class="form-inline d-flex justify-content-center" method="post">
+						{% csrf_token %}
+						<input
+							class="form-control mr-sm-2"
+							type="text"
+							placeholder="Search"
+							aria-label="Search"
+							name="query"
+						/>
+						<button type="submit" class="btn btn-info">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Search Bar -->
+		
+		<!--	 Inventory -->
+		<div class="container my-5">
+			<div class="jumbotron text-center">
+				<h2 class="display-4">About Inventory</h2>
+				<p class="container my-5">
+					Keep track of your lab supplies like never before with LavSaver's inventory function. With this powerful tool, you can easily view and manage all of your lab products in one place. No more searching through stacks of paper or trying to remember what you have on hand. Simply log into LavSaver and have all of your inventory information right at your fingertips. Whether you're a researcher, lab manager, or simply someone who needs to keep track of their lab supplies, LavSaver's inventory function is the ultimate solution for organized and efficient inventory management. Get started today!
 				</p>
 				<a type="button" class="btn btn-info" href="{% url 'signup' %}"> Sign up</a>
 			</div>
-
-		</header>
+		</div>
+		<!--	 Inventory -->
 	</body>
 {% endblock content %}
 </html>
