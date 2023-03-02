@@ -18,10 +18,11 @@
 	<header class="jumbotron text-center">
 		<h1 class="display-4">LabSaver</h1>
 	</header>
-	<div class="container">
+
+	<div class="container my-5">
 
 		<div class="form-signin">
-			<h2>Sign Up</h2> 
+			<h2 class="text-center">Sign Up</h2> 
 			<form method="post">
 				{% csrf_token %}
 				{{ form|crispy }}
@@ -30,9 +31,35 @@
 				</div>
 			</form> 
 			<br><br>
-			<p class="text-center">Already have an account? <a href="{% url 'login' %}">Sign In</a></p>
-			
+			<p class="text-center">
+				Already have an account? 
+				<a href="{% url 'login' %}">Login</a>
+			</p>
 		</div>
 		
 	</div>
+
+	<body>
+		<!-- Sign up -->
+		<div class="container my-5">
+			<div class="jumbotron ">
+				<div class="form-signin">
+					<h2 class="text-center">Sign Up</h2> 
+					<form method="post">
+						{% csrf_token %}
+						{{ form|crispy }}
+						<div class="container text-center">
+							<button class="btn btn-success" type="submit">Sign Up</button> 
+						</div>
+					</form> 
+					<br><br>
+					<p class="text-center">
+						Already have an account? 
+						<a href="{% url 'login' %}">Login</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- Sign up -->
+	</body>
 {% endblock content %}
