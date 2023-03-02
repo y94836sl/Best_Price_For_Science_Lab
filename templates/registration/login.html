@@ -9,21 +9,6 @@
 	</header>
 
 	<body>
-		<div class="container">
-			<h2 class="text-center">Login</h2> 
-			<form method="post">
-				{% csrf_token %}
-				{{ form|crispy }}
-				<div class="container text-center">
-					<button class="btn btn-success" type="submit">Login</button>
-				</div>
-			</form> 
-			<br><br>
-			<p class="text-center">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
-		</div>
-	</body>
-
-	<body>
 		<!-- Sign up -->
 		<div class="container my-5">
 			<div class="jumbotron ">

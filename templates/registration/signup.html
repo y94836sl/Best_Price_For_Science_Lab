@@ -19,26 +19,6 @@
 		<h1 class="display-4">LabSaver</h1>
 	</header>
 
-	<div class="container my-5">
-
-		<div class="form-signin">
-			<h2 class="text-center">Sign Up</h2> 
-			<form method="post">
-				{% csrf_token %}
-				{{ form|crispy }}
-				<div class="container text-center">
-					<button class="btn btn-success" type="submit">Sign Up</button> 
-				</div>
-			</form> 
-			<br><br>
-			<p class="text-center">
-				Already have an account? 
-				<a href="{% url 'login' %}">Login</a>
-			</p>
-		</div>
-		
-	</div>
-
 	<body>
 		<!-- Sign up -->
 		<div class="container my-5">
@@ -52,13 +32,9 @@
 							<button class="btn btn-success" type="submit">Sign Up</button> 
 						</div>
 					</form> 
-					<br><br>
-					<p class="text-center">
-						Already have an account? 
-						<a href="{% url 'login' %}">Login</a>
-					</p>
 				</div>
 			</div>
+			<p class="text-center"> Already have an account? <a href="{% url 'login' %}">Login</a></p>
 		</div>
 		<!-- Sign up -->
 	</body>
