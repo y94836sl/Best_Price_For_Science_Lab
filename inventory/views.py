@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import requests
 from django.contrib.auth.decorators import login_required
+from .models import Product
 
 # Create your views here.
 @login_required(login_url = 'login')
@@ -15,7 +16,14 @@ def staff(request):
 
 @login_required(login_url = 'login')
 def product(request):
-	return render(request, 'dashboard/product.html')
+	items = Product.objects.all() # Use ORM
+#	items = Product.objects.raw('SELECT * from product')
+	context = {
+		'items':items,
+		
+	}
+	
+	return render(request, 'dashboard/product.html', context)
 
 @login_required(login_url = 'login')
 def order(request):
