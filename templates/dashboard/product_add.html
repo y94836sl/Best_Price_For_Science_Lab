@@ -1,0 +1,32 @@
+<!--Source: Example HTML code from https://github.com/KenBroTech/Django-Inventory-Management-System-->
+{% extends 'dashboard_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Product Page{% endblock title %}
+
+{% block content %}
+
+{% include 'inventoryTop.html' %}
+<!--Table-->
+<div class="container">
+	<div class="row my-4">
+		<div class="container my-4">
+			<div class="border bg-white p-3">
+				<h4>Add Products</h4>
+				<hr>
+				<form method="POST" action="{% url 'product_add'%}">
+					{% csrf_token %}
+					{{ form|crispy }}
+					<input class="btn btn-success btn-block" type="submit" value="Add Product">
+				</form>
+			</div>
+		</div>
+	
+	<br>
+	<br>
+</div>
+<!--End Table-->
+
+
+
+{% endblock content %}
