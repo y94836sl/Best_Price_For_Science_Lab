@@ -5,16 +5,37 @@ import requests
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from .forms import ProductForm
+from accounts.models import CustomUser
 
 # Create your views here.
 @login_required(login_url = 'login')
 def DashboardView(request):
 	return render(request, 'dashboard/dashboard.html')
-	
+
+# ------------------------------------------
+# ------------------ Staff -----------------
+# ------------------------------------------
 @login_required(login_url = 'login')
 def staff(request):
-	return render(request, 'dashboard/staff.html')
+	employees = CustomUser.objects.all()
+	context = {
+		'employees': employees
+	}
+	return render(request, 'dashboard/staff.html', context)
 
+@login_required(login_url = 'login')
+def staff_detail(request, pk):
+	employee = CustomUser.objects.get(id=pk)
+	context = {
+		'employee': employee
+	}
+	return render(request, 'dashboard/staff_detail.html', context)
+
+# ---------------------------------------------
+# ------------------ Product ------------------
+# ---------------------------------------------￼
+
+@login_required(login_url = 'login')
 def product(request):
 	items = Product.objects.all() # Use ORM
 #	items = Product.objects.raw('SELECT * from product')
@@ -24,6 +45,7 @@ def product(request):
 	
 	return render(request, 'dashboard/product.html', context)
 
+@login_required(login_url = 'login')
 def product_add(request):
 	items = Product.objects.all() # Use ORM
 	if request.method == 'POST':
@@ -40,6 +62,7 @@ def product_add(request):
 	}
 	return render(request, 'dashboard/product_add.html', context)
 
+@login_required(login_url = 'login')
 def product_delete(request, pk):
 	item = Product.objects.get(id=pk) # Use ORM
 	if request.method == 'POST':
@@ -50,7 +73,7 @@ def product_delete(request, pk):
 	}
 	return render(request, 'dashboard/product_delete.html', context)
 
-@login_required(login_url='user-login')
+@login_required(login_url='login')
 def product_update(request, pk):
 	item = Product.objects.get(id=pk) # Use ORM
 	if request.method == "POST":
@@ -66,6 +89,9 @@ def product_update(request, pk):
 	}
 	return render(request, 'dashboard/product_update.html', context)
 
+# ------------------------------------------￼-
+# ------------------ Order ------------------
+# -------------------------------------------
 @login_required(login_url = 'login')
 def order(request):
 	return render(request, 'dashboard/order.html')

@@ -1,0 +1,59 @@
+<!--Source: Example HTML code from https://github.com/KenBroTech/Django-Inventory-Management-System-->
+{% extends 'dashboard_base.html' %}
+{% block title %}Staff Detail Page{% endblock title %}
+
+{% block content %}
+
+{% include 'inventoryTop.html' %}
+<!--Table-->
+<div class="container">
+	<div class="row my-5">
+		<div class="col-md-4">
+			
+		</div>
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-header bg-info text-white ">
+					Staff Profile Page
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-8 text-center">
+							<span class="h4 "> Profile Information</span>
+							<hr>
+							<table class="table bg-white table-borderless">
+								<tbody>
+									<tr>
+										<th scope="row">Name</th>
+										<td>{{employee.username}}</td>
+									</tr>
+									<tr>
+										<th scope="row">Email</th>
+										<td>{{employee.email}}</td>
+									</tr>
+									<tr>
+										<th scope="row">Phone</th>
+										<td>{{employee.profile.phone}}</td>
+									</tr>
+									<tr>
+										<th scope="row">Address</th>
+										<td>{{employee.profile.address}}</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+						<div class="col-md-4">
+							<img src="{{employee.profile.image.url}}"
+								alt="Avatar" class="img-fluid my-5" style="width: 200px;" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+<!--End Table-->
+{% endblock content %}
