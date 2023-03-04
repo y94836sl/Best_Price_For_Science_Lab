@@ -40,6 +40,32 @@ def product_add(request):
 	}
 	return render(request, 'dashboard/product_add.html', context)
 
+def product_delete(request, pk):
+	item = Product.objects.get(id=pk) # Use ORM
+	if request.method == 'POST':
+		item.delete()
+		return redirect('product')
+	context = {
+		'item': item,
+	}
+	return render(request, 'dashboard/product_delete.html', context)
+
+@login_required(login_url='user-login')
+def product_update(request, pk):
+	item = Product.objects.get(id=pk) # Use ORM
+	if request.method == "POST":
+		form = ProductForm(request.POST, instance=item)
+		if form.is_valid():
+			form.save()
+			return redirect('product')
+	else:
+		form = ProductForm(instance=item)
+	context = {
+		'form': form,
+		'item': item,
+	}
+	return render(request, 'dashboard/product_update.html', context)
+
 @login_required(login_url = 'login')
 def order(request):
 	return render(request, 'dashboard/order.html')
