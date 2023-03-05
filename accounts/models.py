@@ -9,7 +9,7 @@ class Profile(models.Model):
     staff = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
     phone = models.CharField(max_length=20, null=True)
     address = models.CharField(max_length=200, null=True)
-    image = models.ImageField(default="defaultProfileImage.jpeg", upload_to="Profile_Images")
+    image = models.ImageField(default="defaultProfileImage.jpeg", upload_to="Profile_Images", null=True)
 
     def __str__(self):
         return f'{self.staff.username}\'s Profile'

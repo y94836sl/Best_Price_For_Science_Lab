@@ -28,6 +28,7 @@
                                         <th scope="row">Email</th>
                                         <td>{{user.email}}</td>
                                     </tr>
+                                    {% if user.profile %}
                                     <tr>
                                         <th scope="row">Phone</th>
                                         <td>{{user.profile.phone}}</td>
@@ -36,6 +37,16 @@
                                         <th scope="row">Address</th>
                                         <td>{{user.profile.address}}</td>
                                     </tr>
+                                    {% else %}
+                                    <tr>
+                                        <th scope="row">Phone</th>
+                                        <td>0750xxxxxxx</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Address</th>
+                                        <td>Engineering Building</td>
+                                    </tr>
+                                    {% endif %}
                                 </tbody>
                             </table>
 

@@ -4,6 +4,7 @@ from django.views.generic import CreateView, TemplateView
 from .forms import CustomUserCreationForm, UserUpdateForm, ProfileUpdateForm
 import requests
 from django.contrib.auth.decorators import login_required
+from .models import CustomUser, Profile
 
 # Create your views here.
 class SignUpView(CreateView):
