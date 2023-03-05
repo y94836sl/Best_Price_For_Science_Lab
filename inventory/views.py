@@ -10,9 +10,14 @@ from django.contrib import messages
 
 
 # Create your views here.
+
+# ------------------------------------------
+# --------------- Dashboard ----------------
+# ------------------------------------------
 @login_required(login_url = 'login')
 def DashboardView(request):
 	orders = Order.objects.all()
+	products = Product.objects.all()
 	
 	if request.method == 'POST':
 		form = OrderForm(request.POST)
@@ -27,6 +32,7 @@ def DashboardView(request):
 	context = {
 		'form': form,
 		'orders': orders,
+		'products': products,
 	}
 	return render(request, 'dashboard/dashboard.html', context)
 

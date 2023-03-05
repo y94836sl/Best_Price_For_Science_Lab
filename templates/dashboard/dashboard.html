@@ -11,92 +11,169 @@
   <div class="row my-5">
     <div class="col-md-6">
       <div class="bg-white">
-        <canvas id="myChart1" width="400" height="300"></canvas>
-        <script>
-          var ctx = document.getElementById('myChart1').getContext('2d');
-          var myChart1 = new Chart(ctx, {
-            type: 'pie',
-            data: {
-              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              datasets: [{
-                label: 'Products',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-                borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }]
-              }
-            }
-          });
-        </script>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="bg-white">
-        <canvas id="myChart" width="400" height="300"></canvas>
-        <script>
-          var ctx = document.getElementById('myChart').getContext('2d');
-          var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              datasets: [{
-                label: 'Products',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-                borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }]
-              }
-            }
-          });
-        </script>
-      </div>
-    </div>
+        
+        <!---------------------- Order Chart ---------------------->
+        <div class="card">
+          <div class="card-header bg-info text-white">
+            Orders Chart
+          </div>
+          <div class="card-body">
+            <div class="row">
+                
+              <canvas id="myChart1" width="400" height="450"></canvas>
+              <script>
+                var ctx = document.getElementById('myChart1').getContext('2d');
+                var myChart1 = new Chart(ctx, {
+                  type: 'pie',
+                  data: {
+                    labels: [{% for order in orders %} 'ID_{{ order.product.id }}', {% endfor %} ],
+                    datasets: [{
+                      label: 'Orders',
+                      data: [{% for order in orders %} {{ order.order_quantity }}, {% endfor %} ],
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        
+                        'rgba(255, 50, 132, 1)',
+                        'rgba(54, 0, 235, 1)',
+                        'rgba(255, 188, 86, 1)',
+                        'rgba(75, 230, 192, 1)',
+                        'rgba(50, 102, 213, 1)',
+                        'rgba(20, 159, 64, 1)',
+                        
+                        'rgba(150, 20, 132, 1)',
+                        'rgba(54, 162, 100, 1)',
+                        'rgba(0, 66, 86, 1)',
+                        'rgba(75, 2, 192, 1)',
+                        'rgba(153, 208, 77, 1)',
+                        'rgba(0, 255, 0, 1)'
+                      ],
+                      borderColor: [
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)',
+                        'rgba(209, 209, 209, 1)', ], 
+                      
+                      borderWidth: 1 }] },
+                      options: {
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero: true
+                            }
+                          }]
+                        }
+                      }
+                    });
+                  </script>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+        </div>
+        <!---------------------- Order Chart ---------------------->
+        
+        <!---------------------- Product Chart ---------------------->
+        <div class="col-md-6">
+          <div class="bg-white">
+            
+            <div class="card">
+              <div class="card-header bg-info text-white">
+                Products Chart
+              </div>
+              <div class="card-body">
+                
+                <canvas id="myChart" width="400" height="450"></canvas>
+                <script>
+                  var ctx = document.getElementById('myChart').getContext('2d');
+                  var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                      labels: [{% for product in products %} 'ID_{{ product.id}}' ,{% endfor %}],
+                      datasets: [{
+                        label: 'Products ID',
+                        data: [{% for product in products %} {{ product.quantity}} ,{% endfor %}],
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)',
+                          
+                          'rgba(200, 50, 122, 1)',
+                          'rgba(100, 20, 100, 1)',
+                          'rgba(80, 206, 86, 1)',
+                          'rgba(20, 200, 192, 1)',
+                          'rgba(50, 102, 255, 1)',
+                          'rgba(40, 159, 64, 1)',
+                          
+                          'rgba(20, 0, 20, 1)',
+                          'rgba(50, 20, 100, 1)',
+                          'rgba(50, 188, 10, 1)',
+                          'rgba(0, 188, 250, 1)',
+                          'rgba(0, 250, 250, 1)',
+                          
+                          'rgba(2, 79, 250, 1)',
+                          'rgba(49, 192, 22, 1)',
+                          'rgba(80, 133, 99, 1)',
+                          'rgba(20, 96, 192, 1)',
+                          'rgba(50, 102, 48, 1)',
+                          'rgba(40, 199, 64, 1)',
+                          
+                          'rgba(250, 99, 150, 1)',
+                          'rgba(54, 50, 235, 1)',
+                          'rgba(255, 180, 86, 1)',
+                          'rgba(75, 100, 192, 1)',
+                          'rgba(153, 102, 200, 1)',
+                          'rgba(255, 180, 64, 1)',
+                        ],
+                        borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }]
+                      }
+                    }
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!---------------------- Product Chart ---------------------->
+        
   </div>
 </div>
 <!--End Graphs-->
