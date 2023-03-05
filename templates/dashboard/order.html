@@ -26,33 +26,16 @@
 					</tr>
 				</thead>
 				<tbody>
+					{% for order in orders %}
 					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>5</td>
-						<td>
-							Broni
-						</td>
+						<th scope="row">{{ order.id }}</th>
+						<td>{{ order.product.name }}</td>
+						<td>{{ order.product.category }}</td>
+						<td>{{ order.product.quantity }}</td>
+						<td>{{ order.staff.username }}</td>
 					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>28</td>
-						<td>
-							Kenneth
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>36</td>
-						<td>
-							Cecilia
-						</td>
-					</tr>
+					{% endfor %}
+
 				</tbody>
 			</table>
 		</div>

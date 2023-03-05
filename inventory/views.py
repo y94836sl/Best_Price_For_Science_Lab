@@ -4,14 +4,26 @@ from django.http import HttpResponse
 import requests
 from django.contrib.auth.decorators import login_required
 from .models import Product, Order
-from .forms import ProductForm
+from .forms import ProductForm, OrderForm
 from accounts.models import CustomUser
 
 # Create your views here.
 @login_required(login_url = 'login')
 def DashboardView(request):
 	orders = Order.objects.all()
+	
+	if request.method == 'POST':
+		form = OrderForm(request.POST)
+		if form.is_valid():
+			# Add the staff info into the form
+			instance = form.save(commit=False)
+			instance.staff = request.user
+			instance.save()
+			return redirect('dashboard')
+	else:
+		form = OrderForm()
 	context = {
+		'form': form,
 		'orders': orders,
 	}
 	return render(request, 'dashboard/dashboard.html', context)
