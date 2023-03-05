@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from accounts.models import CustomUser
+from django.contrib import messages
+
 
 # Create your views here.
 @login_required(login_url = 'login')
@@ -68,6 +70,8 @@ def product_add(request):
 		form = ProductForm(request.POST)
 		if form.is_valid():
 			form.save()
+			product_name = form.cleaned_data.get('name')
+			messages.success(request, f'{product_name} has been added !')
 			return redirect('product')
 	else:
 		form = ProductForm()
