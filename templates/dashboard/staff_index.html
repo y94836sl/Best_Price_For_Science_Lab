@@ -6,7 +6,7 @@
 	<div class="col-md-4">
 		<div class="card">
 			<div class="card-header">
-				Make Request
+				<h4>Make Request</h4>
 			</div>
 			<div class="card-body">
 				<form method="POST">
@@ -19,7 +19,7 @@
 	<div class="col-md-8">
 		<div class="card">
 			<div class="card-header">
-				Orders Records
+				<h4>Orders Records</h4>
 			</div>
 			<div class="card-body">
 				<table class="table bg-white">
@@ -28,30 +28,18 @@
 							<th scope="col">Product</th>
 							<th scope="col">Category</th>
 							<th scope="col">Quantity</th>
+							<th scope="col">Staff</th>
 						</tr>
 					</thead>
 					<tbody>
-						
+						{% for order in orders %}
 						<tr>
-							<td>Book</td>
-							<td>Stationary</td>
-							<td>10</td>
+							<td>{{ order.product.name }}</td>
+							<td>{{ order.product.category }}</td>
+							<td>{{ order.product.quantity }}</td>
+							<td>{{ order.staff.username }}</td>
 						</tr>
-						<tr>
-							<td>Book</td>
-							<td>Stationary</td>
-							<td>10</td>
-						</tr>
-						<tr>
-							<td>Book</td>
-							<td>Stationary</td>
-							<td>10</td>
-						</tr>
-						<tr>
-							<td>Book</td>
-							<td>Stationary</td>
-							<td>10</td>
-						</tr>
+						{% endfor %}
 						
 					</tbody>
 				</table>

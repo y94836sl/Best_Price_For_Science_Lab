@@ -3,14 +3,18 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import requests
 from django.contrib.auth.decorators import login_required
-from .models import Product
+from .models import Product, Order
 from .forms import ProductForm
 from accounts.models import CustomUser
 
 # Create your views here.
 @login_required(login_url = 'login')
 def DashboardView(request):
-	return render(request, 'dashboard/dashboard.html')
+	orders = Order.objects.all()
+	context = {
+		'orders': orders,
+	}
+	return render(request, 'dashboard/dashboard.html', context)
 
 # ------------------------------------------
 # ------------------ Staff -----------------
@@ -94,7 +98,11 @@ def product_update(request, pk):
 # -------------------------------------------
 @login_required(login_url = 'login')
 def order(request):
-	return render(request, 'dashboard/order.html')
+	orders = Order.objects.all()
+	context = {
+			'orders': orders,
+		}
+	return render(request, 'dashboard/order.html', context)
 
 
 

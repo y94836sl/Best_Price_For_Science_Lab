@@ -25,7 +25,7 @@ class Product(models.Model):
 class Order(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
 	staff = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, null=True)
-	other_quantity = models.PositiveIntegerField(null=True)
+	order_quantity = models.PositiveIntegerField(null=True)
 	date = models.DateTimeField(auto_now_add=True)
 	
 	# Change the display in the admin table
