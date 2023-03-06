@@ -19,6 +19,11 @@ def DashboardView(request):
 	orders = Order.objects.all()
 	products = Product.objects.all()
 	
+	# ------- Satisitc ------- 
+	employeesNum = CustomUser.objects.all().count()
+	ordersNum = orders.count()
+	productsNum = products.count()
+	
 	if request.method == 'POST':
 		form = OrderForm(request.POST)
 		if form.is_valid():
@@ -33,6 +38,9 @@ def DashboardView(request):
 		'form': form,
 		'orders': orders,
 		'products': products,
+		'employeesNum': employeesNum,
+		'ordersNum': ordersNum,
+		'productsNum': productsNum,
 	}
 	return render(request, 'dashboard/dashboard.html', context)
 
@@ -42,16 +50,34 @@ def DashboardView(request):
 @login_required(login_url = 'login')
 def staff(request):
 	employees = CustomUser.objects.all()
+	employeesNum = employees.count()
+	
+	# ------- Satisitc ------- 
+	ordersNum = Order.objects.all().count()
+	productsNum = Product.objects.all().count()
+	
 	context = {
-		'employees': employees
+		'employees': employees,
+		'employeesNum': employeesNum,
+		'ordersNum': ordersNum,
+		'productsNum': productsNum,
 	}
 	return render(request, 'dashboard/staff.html', context)
 
 @login_required(login_url = 'login')
 def staff_detail(request, pk):
 	employee = CustomUser.objects.get(id=pk)
+	
+	# ------- Satisitc ------- 
+	ordersNum = Order.objects.all().count()
+	productsNum = Product.objects.all().count()
+	employeesNum = CustomUser.objects.all().count()
+	
 	context = {
-		'employee': employee
+		'employee': employee,
+		'ordersNum': ordersNum,
+		'productsNum': productsNum,
+		'employeesNum': employeesNum,
 	}
 	return render(request, 'dashboard/staff_detail.html', context)
 
@@ -63,8 +89,17 @@ def staff_detail(request, pk):
 def product(request):
 	items = Product.objects.all() # Use ORM
 #	items = Product.objects.raw('SELECT * from product')
+	
+	# ------- Satisitc ------- 
+	ordersNum = Order.objects.all().count()
+	productsNum = Product.objects.all().count()
+	employeesNum = CustomUser.objects.all().count()
+	
 	context = {
 		'items':items,
+		'employeesNum':employeesNum,
+		'ordersNum':ordersNum,
+		'productsNum':productsNum,
 	}
 	
 	return render(request, 'dashboard/product.html', context)
@@ -72,6 +107,12 @@ def product(request):
 @login_required(login_url = 'login')
 def product_add(request):
 	items = Product.objects.all() # Use ORM
+	
+	# ------- Satisitc ------- 
+	ordersNum = Order.objects.all().count()
+	productsNum = Product.objects.all().count()
+	employeesNum = CustomUser.objects.all().count()
+	
 	if request.method == 'POST':
 		form = ProductForm(request.POST)
 		if form.is_valid():
@@ -85,6 +126,9 @@ def product_add(request):
 	context = {
 		'items':items,
 		'form': form,
+		'employeesNum':employeesNum,
+		'ordersNum':ordersNum,
+		'productsNum':productsNum,
 	}
 	return render(request, 'dashboard/product_add.html', context)
 
@@ -121,8 +165,17 @@ def product_update(request, pk):
 @login_required(login_url = 'login')
 def order(request):
 	orders = Order.objects.all()
+	
+	# ------- Satisitc ------- 
+	ordersNum = orders.count()
+	productsNum = Product.objects.all().count()
+	employeesNum = CustomUser.objects.all().count()
+	
 	context = {
 			'orders': orders,
+			'employeesNum': employeesNum,
+			'ordersNum': ordersNum,
+			'productsNum': productsNum,
 		}
 	return render(request, 'dashboard/order.html', context)
 
