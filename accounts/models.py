@@ -13,3 +13,13 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.staff.username}\'s Profile'
+
+class PotentialProduct(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    url = models.URLField(blank=True)
+    
+    # Change the display in the admin table
+    def __str__(self):
+        return f'{self.name}'
+    

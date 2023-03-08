@@ -29,8 +29,11 @@ def SearchResultView(request):
 		
 		# Extract the data you want to scrape using BeautifulSoup's selectors
 		results = scrapy.getResult(query)
+		if request.method == 'POST':
+			product_name = request.POST.get('product_name')
 		
 		# Render the data in a template
 		return render(request, 'search.html', {'results': results})
 	else:
 		return render(request, 'home.html')
+	

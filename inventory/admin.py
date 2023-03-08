@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order
+from .models import Product, Order, PotentialProduct
 from django.contrib.auth.models import Group
 
 # Change the admin page header
@@ -14,4 +14,5 @@ class ProductAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order)
+admin.site.register(PotentialProduct)
 

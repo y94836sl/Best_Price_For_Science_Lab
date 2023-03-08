@@ -1,9 +1,9 @@
 #<!--Source: Example HTML code from https://github.com/KenBroTech/Django-Inventory-Management-System-->
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import requests
 from django.contrib.auth.decorators import login_required
-from .models import Product, Order
+from .models import Product, Order, PotentialProduct
 from .forms import ProductForm, OrderForm
 from accounts.models import CustomUser
 from django.contrib import messages
@@ -23,6 +23,10 @@ def DashboardView(request):
 	employeesNum = CustomUser.objects.all().count()
 	ordersNum = orders.count()
 	productsNum = products.count()
+	LowInStockProducts = products.count()
+	recent_PotentialProducts = PotentialProduct.objects.all().order_by('-id')[:2]
+	
+	LowInStockProducts = products.filter(quantity__lt=10)[:2]
 	
 	if request.method == 'POST':
 		form = OrderForm(request.POST)
@@ -41,8 +45,34 @@ def DashboardView(request):
 		'employeesNum': employeesNum,
 		'ordersNum': ordersNum,
 		'productsNum': productsNum,
+		'recent_PotentialProducts': recent_PotentialProducts,
+		'LowInStockProducts': LowInStockProducts,
 	}
 	return render(request, 'dashboard/dashboard.html', context)
+
+def update_product_info(request):
+	if request.method == 'POST':
+		product_name = request.POST.get('product_name')
+		product_price = request.POST.get('product_price')
+		product_url = request.POST.get('product_url')
+		
+		# Update the product information
+		PotentialProduct = PotentialProduct(
+					staff=request.user,
+					name=product_name,
+					price=product_price,
+					url=product_url
+				)
+		PotentialProduct.save()
+		
+		context = {
+			'product_name': product_name,
+			'product_price': product_price,
+			'product_url': product_url,
+		}
+		
+		render(request, 'dashboard/dashboard.html', context)
+	return JsonResponse({'success': False})
 
 # ------------------------------------------
 # ------------------ Staff -----------------
@@ -55,12 +85,14 @@ def staff(request):
 	# ------- Satisitc ------- 
 	ordersNum = Order.objects.all().count()
 	productsNum = Product.objects.all().count()
+	LowInStockProducts = Product.objects.all().filter(quantity__lt=10)[:2]
 	
 	context = {
 		'employees': employees,
 		'employeesNum': employeesNum,
 		'ordersNum': ordersNum,
 		'productsNum': productsNum,
+		'LowInStockProducts': LowInStockProducts,
 	}
 	return render(request, 'dashboard/staff.html', context)
 
@@ -94,12 +126,14 @@ def product(request):
 	ordersNum = Order.objects.all().count()
 	productsNum = Product.objects.all().count()
 	employeesNum = CustomUser.objects.all().count()
+	LowInStockProducts = Product.objects.all().filter(quantity__lt=10)[:2]
 	
 	context = {
 		'items':items,
 		'employeesNum':employeesNum,
 		'ordersNum':ordersNum,
 		'productsNum':productsNum,
+		'LowInStockProducts':LowInStockProducts,
 	}
 	
 	return render(request, 'dashboard/product.html', context)
@@ -112,6 +146,7 @@ def product_add(request):
 	ordersNum = Order.objects.all().count()
 	productsNum = Product.objects.all().count()
 	employeesNum = CustomUser.objects.all().count()
+	LowInStockProducts = Product.objects.all().filter(quantity__lt=10)[:2]
 	
 	if request.method == 'POST':
 		form = ProductForm(request.POST)
@@ -129,6 +164,7 @@ def product_add(request):
 		'employeesNum':employeesNum,
 		'ordersNum':ordersNum,
 		'productsNum':productsNum,
+		'LowInStockProducts':LowInStockProducts,
 	}
 	return render(request, 'dashboard/product_add.html', context)
 
@@ -170,12 +206,14 @@ def order(request):
 	ordersNum = orders.count()
 	productsNum = Product.objects.all().count()
 	employeesNum = CustomUser.objects.all().count()
+	LowInStockProducts = Product.objects.all().filter(quantity__lt=10)[:2]
 	
 	context = {
 			'orders': orders,
 			'employeesNum': employeesNum,
 			'ordersNum': ordersNum,
 			'productsNum': productsNum,
+			'LowInStockProducts': LowInStockProducts,
 		}
 	return render(request, 'dashboard/order.html', context)
 

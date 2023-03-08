@@ -1,23 +1,80 @@
 <!--   Top   -->
 <div class="container">
 	<div class="row">
+
+		<!-------------	LOW IN STOCK ------------->
 		<div class="col-md-4 mt-4">
 			<div class="card">
 				<div class="card-header bg-info text-white">
-					Information
+					Low in Stock
 				</div>
 				<div class="card-body">
-					<h3 class="my-4">New Information</h3>
+					<table class="table table-hover">
+						
+						<thead>
+							<tr>
+								<th scope="col">Product Name</th>
+								<th scope="col">Quantity</th>
+							</tr>
+						</thead>
+						
+						{% for p in LowInStockProducts %}
+						{% if p.url %}
+						
+						<tbody>
+								<td>
+									<a class="text-dark" href="{{ p.url }}">
+										{{ p.name }}
+									</a>
+								</td>
+								<td>
+									<a class="text-dark" href="{{ p.url }}">
+										{{ p.quantity }}
+									</a>
+								</td>
+						</tbody>
+						
+						{% else %}
+						
+						<tbody>
+							<td>
+								{{ p.name }}
+							</td>
+							<td>
+								{{ p.quantity }}
+							</td>
+						</tbody>
+						
+						{% endif %}
+						
+						{% endfor %}
+					</table>
+					
 				</div>
 			</div>
 		</div>
+		<!-------------	LOW IN STOCK ------------->
+		
+		<!-------------	STATISTIC ------------->
 		<div class="col-md-8 mt-4">
 			<div class="card">
 				<div class="card-header bg-info text-white">
-					Dashboard Statistics
+					<a class="text-decoration-none text-white" href="{% url 'dashboard' %}">Dashboard</a>
 				</div>
 				<div class="card-body">
 					<div class="row">
+						
+<!--						<div class="col-md-4">-->
+<!--							<a class="text-decoration-none text-dark" href="{% url 'dashboard' %}">-->
+<!--								<div class="card my-card shadow">-->
+<!--									<div class="card-body text-center">-->
+<!--										<h4> Dashboard <i class="fas fa-users"></i></h4>-->
+<!--										<h3> </h3>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</a>-->
+<!--						</div>-->
+						
 						<div class="col-md-4">
 							<a class="text-decoration-none text-dark" href="{% url 'staff' %}">
 								<div class="card my-card shadow">
@@ -28,6 +85,7 @@
 								</div>
 							</a>
 						</div>
+						
 						<div class="col-md-4">
 							<a class="text-decoration-none text-dark" href="{% url 'product' %}">
 								<div class="card my-card shadow">
@@ -52,6 +110,8 @@
 				</div>
 			</div>
 		</div>
+		<!-------------	STATISTIC ------------->
+		
 	</div>
 </div>
 <!-- End Top -->

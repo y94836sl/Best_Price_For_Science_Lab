@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from accounts.models import CustomUser
 
 # Different categories of products
 CATEGORY = (
@@ -31,3 +32,11 @@ class Order(models.Model):
 	# Change the display in the admin table
 	def __str__(self):
 		return f'{self.product} ordered by {self.staff.username}'
+	
+class PotentialProduct(models.Model):
+	id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+	staff = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, null=True)
+	name = models.CharField(max_length=200, null=True)
+	price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+	url = models.URLField(blank=True)
+	
