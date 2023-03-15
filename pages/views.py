@@ -35,13 +35,25 @@ def SearchResultView(request):
 	if request.method == 'POST':
 		query = request.POST.get('query')
 		
-		# Extract the data you want to scrape using BeautifulSoup's selectors
-		results = scrapy.getResult(query)
-		if request.method == 'POST':
-			product_name = request.POST.get('product_name')
+		try:
+			# Extract the data you want to scrape using BeautifulSoup's selectors
+			results = scrapy.getResult(query)
+			
+			if not results:
+				# Show the "product not found" page
+				return render(request, 'product_not_found.html')
+			
+			return render(request, 'search.html', {'results': results})
+		except IndexError:
+			# Show the "product not found" page
+			return render(request, 'product_not_found.html')
 		
-		# Render the data in a template
-		return render(request, 'search.html', {'results': results})
+			
+	
+#		if request.method == 'POST':
+#			product_name = request.POST.get('product_name')
+#		return render(request, 'search.html', {'results': results})
 	else:
 		return render(request, 'home.html')
+	
 	

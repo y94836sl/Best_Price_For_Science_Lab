@@ -1,0 +1,47 @@
+<!-- product_not_found.html -->
+{% extends 'base.html' %}
+
+{% block title %}Page Not Found{% endblock title %}
+
+{% block content %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Product Not Found</title>
+</head>
+<body>
+    <div class="container my-5">
+        
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Product Not Found</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Sorry, we could not find the product you were looking for.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="container my-5 text-center">
+        <div class="row justify-content-center">
+            <div class="col-md-1 mt-4">
+                <a class="btn btn-info" href="{% url 'home' %}" role="button">Home</a>
+            </div>
+            <div class="col-md-1 mt-4">
+                <a class="btn btn-info" href="{% url 'search' %}" role="button">Search</a>
+            </div>
+        </div>
+    </div></body>
+</html>
+{% endblock content %}
