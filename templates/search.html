@@ -93,6 +93,20 @@
 				{% csrf_token %}
 				<p>{{ message|crispy }}</p>
 				{% else %}
+				
+				<form method="get" id="perPageForm">
+					<div class="container my-3">
+						<div class="form-inline d-flex justify-content-end">
+							<label for="perPage" class="mr-2">Products per page:</label>
+							<select class="custom-select" id="perPage" name="perPage">
+								<option value="10">10</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+							</select>
+						</div>
+					</div>
+				</form>
+				
 				<table class="table table-hover bg-white">
 					<thead class="bg-info">
 						<tr class="text-white">
