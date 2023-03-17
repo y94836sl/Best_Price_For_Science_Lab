@@ -200,12 +200,7 @@ def getResult(query):
             sortedDict2["supplier"] = supplier
             sortedDict[name] = dict(sortedDict2)
             
-#    sortedDict = dict(sorted(sortedDict.items(), key=lambda x: float(x[1]['price'][1:]),))
     sortedDict = dict(sorted(sortedDict.items(), key=lambda x: float(x[1]['price'].replace('£', '').replace('.', '').replace(',', '') ),))
-#    sortedDict = dict(sorted(sortedDict.items(), key=lambda x: float(x[1]['price'].replace('.', '')),))
-    
-    
-            
     
     return sortedDict
 

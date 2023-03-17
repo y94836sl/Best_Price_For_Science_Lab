@@ -5,8 +5,6 @@ from search import scrapy
 import requests
 
 from inventory.models import Product
-import re
-
 
 # Create your views here.
 def HomePageView(request): 
@@ -24,6 +22,9 @@ def AboutView(request):
 # ------------------------------ #
 # ------- Boolean Search ------- #
 # ------------------------------ #
+
+
+import re
 
 def process_boolean_query(query):
 	# Replace boolean operators with their corresponding symbols
@@ -53,18 +54,20 @@ def SearchView(request):
 def SearchResultView(request):
 	if request.method == 'POST':
 		query = request.POST.get('query')
-	
+		
+		query.lower()
 		# Preprocess the query to handle boolean search
 		processed_query = process_boolean_query(query)
 		
 		try:
 			# Extract the data you want to scrape using BeautifulSoup's selectors
 			results = scrapy.getResult(processed_query)
+#			results = scrapy.getResult(query)
+			
 			
 			if not results:
 				# Show the "product not found" page
 				return render(request, 'product_not_found.html')
-			
 			
 			return render(request, 'search.html', {'results': results})
 		except IndexError:
