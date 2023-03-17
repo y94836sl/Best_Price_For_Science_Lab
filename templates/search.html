@@ -33,6 +33,7 @@
 							aria-label="Search"
 							name="query"
 						/>
+						<br>
 						<button type="submit" class="btn btn-info">Search</button>
 					</form>
 				</div>
@@ -94,19 +95,6 @@
 				<p>{{ message|crispy }}</p>
 				{% else %}
 				
-				<form method="get" id="perPageForm">
-					<div class="container my-3">
-						<div class="form-inline d-flex justify-content-end">
-							<label for="perPage" class="mr-2">Products per page:</label>
-							<select class="custom-select" id="perPage" name="perPage">
-								<option value="10">10</option>
-								<option value="25">25</option>
-								<option value="50">50</option>
-							</select>
-						</div>
-					</div>
-				</form>
-				
 				<table class="table table-hover bg-white">
 					<thead class="bg-info">
 						<tr class="text-white">
@@ -117,39 +105,21 @@
 						</tr>
 					</thead>
 					<tbody>
+						<!-- Display product -->
 						{% for productName, detail in results.items %}
 						<tr>
 							<td>{{ detail.supplier }}</td>
 							<td>{{ productName }}</td>
 							<td>{{ detail.price }}</td>
 							<td>
-								<!--							<a href="{{ detail.url }}" class="btn btn-info">Buy me</a>-->
 								<a href="{{ detail.url }}" class="btn btn-info" id="store-button" >
 									Buy me
 								</a>
-								<script>
-									var link = document.getElementById("store-button");
-									link.addEventListener("click", function(event) {
-										// The user has clicked the link
-										// You can access information about the link here
-										
-										var product_name = {{ productName }};
-										var product_price = {{ detail.price }};
-										var product_url = {{ detail.url }};
-										
-										//									alert(product_name, product_price, product_url)
-										var xhr = new XMLHttpRequest();
-										xhr.open("POST", "{% url 'update_product_info' %}", true);
-										xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-										xhr.send("product_name=" + product_name + "&product_price=" + product_price + "&product_url=" + product_url);
-									});
-								</script>
 							</td>
 						</tr>
 						{% endfor %}
 					</tbody>
 				</table>
-				
 				{% endif %}
 			{% endif %}
 			

@@ -53,20 +53,18 @@ def SearchView(request):
 def SearchResultView(request):
 	if request.method == 'POST':
 		query = request.POST.get('query')
-		
-		query.lower()
+	
 		# Preprocess the query to handle boolean search
 		processed_query = process_boolean_query(query)
 		
 		try:
 			# Extract the data you want to scrape using BeautifulSoup's selectors
-			results = scrapy.getResult(query)
-#			results = scrapy.getResult(query)
-			
+			results = scrapy.getResult(processed_query)
 			
 			if not results:
 				# Show the "product not found" page
 				return render(request, 'product_not_found.html')
+			
 			
 			return render(request, 'search.html', {'results': results})
 		except IndexError:
