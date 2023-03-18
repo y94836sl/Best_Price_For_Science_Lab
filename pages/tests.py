@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase, TestCase
 from django.contrib.auth import get_user_model 
 from django.urls import reverse
+from inventory.models import Product
 
 # Create your tests here.
 
@@ -40,3 +41,30 @@ class SignupPageTests(TestCase):
 		self.assertEqual(get_user_model().objects.all().count(), 1)
 		self.assertEqual(get_user_model().objects.all()[0].username, self.username)
 		self.assertEqual(get_user_model().objects.all()[0].email, self.email)
+		
+		
+class SearchViewTests(TestCase):
+	def setUp(self):
+		self.product = Product.objects.create(
+			name='Test Product',
+			category='Stationary',
+			quantity=5,
+			price=9.99,
+			url='https://example.com'
+		)
+		
+	def test_search_view(self):
+		response = self.client.get(reverse('search'))
+		self.assertEqual(response.status_code, 200)
+		
+	def test_search_result_view_valid_query(self):
+		response = self.client.post(reverse('search'), data={'query': 'Ethanol'})
+		self.assertEqual(response.status_code, 200)
+		
+	def test_search_result_view_empty_query(self):
+		response = self.client.post(reverse('search'), data={'query': ''})
+		self.assertEqual(response.status_code, 200)
+		
+	def test_search_result_view_invalid_query(self):
+		response = self.client.post(reverse('search'), data={'query': 'Nonexistent Product'})
+		self.assertEqual(response.status_code, 200)
