@@ -3,31 +3,35 @@ from bs4 import BeautifulSoup
 import json
 from urllib.parse import quote
 
+import re
 import requests
 
 result = {}
 
-
 def generateUrl(query):
-#    query = query.replace(" ", "+")
-    query = quote(query)
-    # Generate Amazon URL from query
-    url1 = "https://www.amazon.co.uk/s?k=" + query
-
-    # Generate TechBuyer URL from query
-    url2 = "https://www.techbuyer.com/uk/catalogsearch/result/?q=" + query
-
-    # Generate Scientific Laboratory Supplies URL from query
-    url3 = "https://www.scientificlabs.co.uk/search/" + query
-
-    #     # Generate RS URL from query
-    #     url4 = 'https://uk.rs-online.com/web/c/?searchTerm=' + query
-
-    # Generate Farnell URL from query
-    url4 = "https://uk.farnell.com/search?st=" + query + "&gs=true"
+    # Identify boolean search operators and process the query
+    bool_operators = re.findall(r'\b(AND|OR)\b', query)
+    words = re.split(r'\s+(?:AND|OR)\s+', query)
+    
+    if not bool_operators:
+        bool_operators = ['OR'] * (len(words) - 1)
+        
+    # Combine the words and operators to form the final query
+    processed_query = ' '.join(f'{quote(word)} {operator}' for word, operator in zip(words, bool_operators)) + quote(words[-1])
+    
+    # Generate Amazon URL from processed_query
+    url1 = "https://www.amazon.co.uk/s?k=" + processed_query
+    
+    # Generate TechBuyer URL from processed_query
+    url2 = "https://www.techbuyer.com/uk/catalogsearch/result/?q=" + processed_query
+    
+    # Generate Scientific Laboratory Supplies URL from processed_query
+    url3 = "https://www.scientificlabs.co.uk/search/" + processed_query
+    
+    # Generate Farnell URL from processed_query
+    url4 = "https://uk.farnell.com/search?st=" + processed_query + "&gs=true"
     
     return url1, url2, url3, url4
-
 
 def getData(url):
     HEADERS = {
@@ -220,3 +224,5 @@ def getResult(query):
 #print(getResult("Ethanol"))
 #result = getResult("Ethanol")
 #print(sortDict(getResult("Ethanol")))
+
+print(getResult("Ammonium AND Persulfate OR Ethanol"))
