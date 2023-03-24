@@ -1,8 +1,33 @@
 /*<!--Source: Example HTML code from https://github.com/KenBroTech/Django-Inventory-Management-System-->*/
 body{
-    background: rgb(230, 227, 227);
+    background: #EEA47FFF;
 }
 .my-card:hover{
     transform: scale(1.1);
     transition: 0.2s ease-in-out;
+}
+
+<!-- Add custom styles -->
+
+.jumbotron.header {
+    background-color: #00539CFF;
+    color: #fff;
+    font-size: 36px;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.header h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px #333;
+}
+
+.header p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #ddd;
+    text-shadow: 1px 1px #333;
 }

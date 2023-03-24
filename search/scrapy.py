@@ -208,21 +208,5 @@ def getResult(query):
     
     return sortedDict
 
-#def sortDict(dic):
-#    sortedDict = {}
-#    for supplier, value1 in dic.items():
-#        for name, detail in value1.items():
-#            sortedDict2 = detail
-##            sortedDict2 = sorted(detail.items(), key=lambda x: float(x['price'].replace('£', '')))
-#            sortedDict2["supplier"] = supplier
-#            sortedDict[name] = dict(sortedDict2)
-#    
-#    sortedDict = dict(sorted(sortedDict.items(), key=lambda x: float(x[1]['price'][1:]),))
-#        
-#    return sortedDict
-                
 #print(getResult("Ethanol"))
-#result = getResult("Ethanol")
-#print(sortDict(getResult("Ethanol")))
-
-print(getResult("Ammonium AND Persulfate OR Ethanol"))
+#print(getResult("Ammonium AND Persulfate OR Ethanol"))
