@@ -104,12 +104,15 @@ def staff_detail(request, pk):
 	ordersNum = Order.objects.all().count()
 	productsNum = Product.objects.all().count()
 	employeesNum = CustomUser.objects.all().count()
+	LowInStockProducts = Product.objects.all().filter(quantity__lt=10)[:2]
 	
 	context = {
 		'employee': employee,
 		'ordersNum': ordersNum,
 		'productsNum': productsNum,
 		'employeesNum': employeesNum,
+		'LowInStockProducts': LowInStockProducts,
+		
 	}
 	return render(request, 'dashboard/staff_detail.html', context)
 
